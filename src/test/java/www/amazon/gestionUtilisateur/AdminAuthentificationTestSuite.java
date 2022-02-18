@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 //import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -97,7 +98,7 @@ driver.close();
 		
 	}
 	
-@Test
+
 	public void TestLoginFieled()
 	{
 		
@@ -140,11 +141,44 @@ driver.close();
 		
 	}
 	
+
+
+@Test
+public void TestAlert() throws InterruptedException
+{
+	
+
+	String url="https://the-internet.herokuapp.com/javascript_alerts" ;
+		    
+	driver.get(url);
+	driver.manage().window().maximize();
+	
+
+driver.findElement(By.xpath("//button[@onclick='jsAlert()']")).click();
+
+
+Thread.sleep(2000);
+
+driver.switchTo().alert().accept();
+
+String element = driver.findElement(By.id("result")).getText();   
+
+String   Resultattendu = "You successfully clicked an alert" ;
+Assert.assertEquals(element,Resultattendu);
+
+ 
+	
+	
+}
+
+
+
+
 	@After
-public void exit () {
+public void exit () throws InterruptedException {
 	
 	//	WebDriver  driver = new ChromeDriver();
-		
+		Thread.sleep(3000);
 	driver.close();
 	driver.quit();
 }
